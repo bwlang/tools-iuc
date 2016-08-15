@@ -592,7 +592,7 @@
                             <option value="max" >Max</option>
                             <option value="sum" >Sum</option>
                         </param>
-                        <param name="rule_quality_trimming_treatments" type="select" display="radio" label="Rule tu use to compare quality score to calculated value" help="By default, 'less than' is used. (-trim_qual_rule)">
+                        <param name="rule_quality_trimming_treatments" type="select" display="radio" label="Rule to use when comparing quality score to calculated value" help="By default, 'less than' is used. (-trim_qual_rule)">
                             <option value="lt" selected="true">Less than</option>
                             <option value="gt" >Greater than</option>
                             <option value="et" >Equal to</option>
