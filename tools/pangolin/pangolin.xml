@@ -9,13 +9,14 @@
         pangolin
         --threads \${GALAXY_SLOTS:-1}
         $alignment
-        --outfile '$output1' 
+        --outfile '$outputcsv' 
         --max-ambig $max_ambig
         --min-length $min_length
         '$input1'
         #if $alignment
             && mv sequences.aln.fasta '$align1'
         #end if 
+        csvtk csv2tab '$outputcsv' > '$outputtsv'
     ]]></command>
     <inputs>
       <param type="data" name="input1" format="fasta" label="Input FASTA File(s)" /> 
@@ -27,7 +28,8 @@
           value="10000" min="0" help="Minimum query length allowed for pangolin to attempt assignment"/>
     </inputs>
     <outputs>
-      <data name="output1" format="csv" label="pangolin on ${on_string}" />
+      <data name="outputtsv" format="tsv" label="pangolin on ${on_string} tsv" />
+      <data name="outputcsv" format="csv" label="pangolin on ${on_string} csv" />
       <data name="align1" format="fasta" label="pangolin alignment on ${on_string}">
         <filter>alignment == True</filter>
       </data>
@@ -35,12 +37,14 @@
     <tests>
       <test>
           <param name="input1" value="test1.fasta"/>
-          <output name="output1" file="result1.csv" ftype="csv" />
+          <output name="outputtsv" file="result1.tsv" ftype="tsv" />
+          <output name="outputcsv" file="result1.csv" ftype="csv" />
       </test>
       <test>
           <param name="alignment" value="--alignment" />
           <param name="input1" value="test1.fasta" />
-          <output name="output1" file="result1.csv" ftype="csv" />
+          <output name="outputtsv" file="result1.tsv" ftype="tsv" />
+          <output name="outputcsv" file="result1.csv" ftype="csv" />
           <output name="align1" file="aln1.fasta" ftype="fasta" />
       </test>
     </tests>
